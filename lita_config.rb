@@ -11,3 +11,15 @@ Lita.configure do |config|
   config.adapters.twitter.access_token        = ENV['ACCESS_TOKEN']
   config.adapters.twitter.access_token_secret = ENV['ACCESS_TOKEN_SECRET']
 end
+
+module Lita
+  module Handlers
+    class HelloHandler < Handler
+      route /hi/i, :hello, command: false
+      def hello(response)
+        response.reply 'Hello!'
+      end
+    end
+    Lita.register_handler(HelloHandler)
+  end
+end
